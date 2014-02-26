@@ -1,0 +1,30 @@
+<% model_class = Post %>
+<div class="page-header">
+  <h1>Promotions</h1>
+</div>
+<% if @posts.present? %>
+<table class="data-table table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>Sr No.</th>
+    <th><%= model_class.human_attribute_name(:title) %></th>
+    <th><%= model_class.human_attribute_name(:content) %></th>
+    <th><%= model_class.human_attribute_name(:url) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @posts.each_with_index do |post, i| %>
+      <tr>
+        <td> <%= i + 1 %> </td>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.url %></td>
+        <td><%= link_to t('.show', :default => t("helpers.links.show")),
+                        promotion_path(post), target: "_blank", class: "btn btn-mini promotion_inc", data: {id: post.id } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+    <h3> Oops. Nothing to promote. </h3>
+<% end %>
